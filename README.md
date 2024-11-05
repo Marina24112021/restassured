@@ -1,5 +1,5 @@
 <h1>A hosted REST-API ready to respond to your AJAX requests.</h1>
-<img title="reqres" src="resources/images/reqres.png" width="850">  
+<img title="reqres" src="images/reqres.png" width="850" alt="reqres">  
 
 Reqres is a real API
 Reqres simulates real application scenarios. If you want to test a user authentication system, Reqres will respond to a successful login/register request with a token for you to identify a sample user, or with a 403 forbidden response to an unsuccessful login/registration attempt.
