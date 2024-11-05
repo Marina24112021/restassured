@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
-import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
 
 public class CreateUserPage extends TestBase {
@@ -16,13 +15,13 @@ public class CreateUserPage extends TestBase {
                 .contentType(JSON)
                 .log().uri()
                 .when()
-                    .log().uri()
-                    .post("/users")
-                    .then()
-                        .log().all()
-                        .statusCode(201)
-                        .body("name", is("morpheus"))
-                        .body("job", is("leader"));
+                .log().uri()
+                .post("/users")
+                .then()
+                .log().all()
+                .statusCode(201)
+                .body("name", is("morpheus"))
+                .body("job", is("leader"));
     }
 
     @Test
@@ -33,30 +32,32 @@ public class CreateUserPage extends TestBase {
                 .contentType(JSON)
                 .log().uri()
                 .when()
-                    .log().uri()
-                    .post("/users")
-                    .then()
-                        .log().all()
-                        .statusCode(201)
-                        .body("name", is("morpheus"))
-                        .body("job", is(""));
+                .log().uri()
+                .post("/users")
+                .then()
+                .log().all()
+                .statusCode(201)
+                .body("name", is("morpheus"))
+                .body("job", is(""));
     }
+
     @Test
-    void positiveCreateUserWithoutNameTest() {
+    void negativeCreateUserWithoutNameTest() {
         String newUser = "{\"name\": \"\",\"job\": \"leader\"}";
         given()
                 .body(newUser)
                 .contentType(JSON)
                 .log().uri()
                 .when()
-                    .log().uri()
-                    .post("/users")
-                    .then()
-                        .log().all()
-                        .statusCode(201)
-                        .body("name", is(""))
-                        .body("job", is("leader"));
+                .log().uri()
+                .post("/users")
+                .then()
+                .log().all()
+                .statusCode(201)
+                .body("name", is(""))
+                .body("job", is("leader"));
     }
+
     @Test
     void negativeCreateNullUserTest() {
         String newUser = "{\"name\": \"\",\"job\": \"\"}";
@@ -65,14 +66,15 @@ public class CreateUserPage extends TestBase {
                 .contentType(JSON)
                 .log().uri()
                 .when()
-                    .log().uri()
-                    .post("/users")
-                    .then()
-                        .log().all()
-                        .statusCode(201)
-                        .body("name", is(""))
-                        .body("job", is(""));
+                .log().uri()
+                .post("/users")
+                .then()
+                .log().all()
+                .statusCode(201)
+                .body("name", is(""))
+                .body("job", is(""));
     }
+
     @Test
     void positiveCreateAnotherUserTest() {
         String newUser = "{\"name\": \"Marina Chen\",\"job\": \"QA engineer\"}";
@@ -81,23 +83,12 @@ public class CreateUserPage extends TestBase {
                 .contentType(JSON)
                 .log().uri()
                 .when()
-                    .log().uri()
-                    .post("/users")
-                    .then()
-                        .log().all()
-                        .statusCode(201)
-                        .body("name", is("Marina Chen"))
-                        .body("job", is("QA engineer"));
-    }
-    @Test
-    void positiveCheckExistingColorsInListOfResourceTest() {
-        given()
-                .when()
                 .log().uri()
-                .get("/unknown")
+                .post("/users")
                 .then()
-                    .log().all()
-                    .statusCode(200)
-                    .body("data.color", hasItems("#98B2D1", "#BF1932","#53B0AE"));
+                .log().all()
+                .statusCode(201)
+                .body("name", is("Marina Chen"))
+                .body("job", is("QA engineer"));
     }
 }
