@@ -1,0 +1,31 @@
+plugins {
+    id 'java-library'
+}
+
+group = 'uz.kinoman'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    testImplementation(
+            "org.junit.jupiter:junit-jupiter:5.10.0",
+            "io.rest-assured:rest-assured:5.5.0"
+    )
+}
+
+compileTestJava{
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
