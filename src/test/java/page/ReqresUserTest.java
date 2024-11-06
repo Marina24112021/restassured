@@ -4,9 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
+import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
 
-public class CreateUserPageTest extends TestBase {
+
+public class ReqresUserTest extends TestBase {
     @Test
     void positiveCreateUserTest() {
         String newUser = "{\"name\": \"morpheus\",\"job\": \"leader\"}";
@@ -133,5 +135,16 @@ public class CreateUserPageTest extends TestBase {
                 .body("name", is("morpheus"))
                 .body("job", is("zion resident"));
 
+    }
+    @Test
+    void positiveCheckExistingColorsInListOfResourceTest() {
+        given()
+                .when()
+                .log().uri()
+                .get("/unknown")
+                .then()
+                .log().all()
+                .statusCode(200)
+                .body("data.color", hasItems("#98B2D1", "#BF1932", "#53B0AE"));
     }
 }
