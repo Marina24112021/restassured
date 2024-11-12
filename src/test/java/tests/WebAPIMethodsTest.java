@@ -1,4 +1,4 @@
-package pages;
+package tests;
 
 import io.restassured.response.Response;
 import modules.*;
